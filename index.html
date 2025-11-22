@@ -1,324 +1,426 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A demo frontend that posts form submissions directly to a Google Form.">
-  <meta property="og:title" content="google-forms-frontend">
-  <meta property="og:description" content="A demo frontend that posts form submissions directly to a Google Form.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://forms.ardis.lu/">
-  <link rel="canonical" href="https://forms.ardis.lu/">
-  <link rel="icon" href="data:,">
-  <title>google-forms-frontend</title>
-  <style>
-    :root {
-      --black: hsl(235deg 90% 10%);
-      --white: hsl(235deg 10% 90%);
-      --primary: hsl(235deg 50% 50%);
-      --primary-lightest: hsl(235deg 30% 90%);
-      --secondary: hsl(354deg 50% 50%);
-      --secondary-lighter: hsl(354deg 20% 85%);
-    }
-
-    body {
-      font-family: system-ui, sans-serif;
-      color: var(--black);
-      background: var(--primary-lightest);
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    main {
-      inline-size: min(100% - 16px, 720px);
-      margin-inline: auto;
-    }
-
-    a {
-      display: inline flow-root;
-      color: var(--secondary);
-      font-weight: 700;
-      text-decoration: none;
-      border-radius: 4px;
-    }
-
-    a::after {
-      content: "";
-      position: relative;
-      display: block;
-      block-size: 2px;
-      background: var(--secondary);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 400ms;
-    }
-
-    a:hover::after,
-    a:focus::after {
-      transform: scaleX(1);
-      transition: transform 150ms;
-      transform-origin: left;
-    }
-
-    button {
-      background: var(--primary);
-      color: var(--white);
-      font-weight: 700;
-      inline-size: fit-content;
-      border: none;
-      padding: 12px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: filter 500ms;
-    }
-
-    button:hover,
-    button:focus {
-      filter: brightness(110%);
-      transition: filter 150ms;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    div {
-      margin-block-end: 16px;
-      position: relative;
-    }
-
-    div::before {
-      content: "";
-      display: block;
-      position: absolute;
-      inset-inline-start: -16px;
-      inline-size: 8px;
-      block-size: 100%;
-      background: var(--secondary);
-      transform: scaleY(0);
-      transition: transform 150ms;
-    }
-
-    div:focus-within::before {
-      transform: scaleY(1);
-      transition: transform 400ms;
-    }
-
-    @keyframes shiftRight {
-      from {
-        background-position: 30%;
-      }
-
-      to {
-        background-position: 50%;
-      }
-    }
-
-    div::after {
-      content: "";
-      display: block;
-      position: absolute;
-      z-index: -1;
-      top: 0;
-      left: -8px;
-      inline-size: calc(100% + 16px);
-      block-size: 100%;
-      border-radius: 0 8px 8px 0;
-      background: linear-gradient(90deg,
-          hsl(354deg 50% 50%) 0%,
-          hsl(347deg 51% 55%) 4%,
-          hsl(341deg 50% 59%) 9%,
-          hsl(333deg 47% 63%) 14%,
-          hsl(323deg 40% 67%) 20%,
-          hsl(308deg 32% 71%) 27%,
-          hsl(288deg 31% 76%) 36%,
-          hsl(269deg 34% 81%) 46%,
-          hsl(252deg 33% 86%) 61%,
-          hsl(236deg 29% 90%) 99%);
-      background-size: 400%;
-      animation: shiftRight 3s linear infinite alternate;
-      filter: opacity(0);
-      transition: filter 300ms;
-    }
-
-    div:focus-within::after {
-      filter: opacity(0.4);
-      transition: filter 150ms;
-    }
-
-    label {
-      font-weight: 700;
-    }
-
-    aside {
-      margin-block-end: 8px;
-    }
-
-    @media (min-width: 1200px) {
-      aside {
-        position: absolute;
-        inset-block-start: 16px;
-        inset-inline-end: -8px;
-        transform: translateX(100%);
-        max-inline-size: 30ch;
-        font-weight: 300;
-      }
-
-      div:focus-within aside {
-        font-weight: 500;
-      }
-    }
-
-    input,
-    textarea {
-      box-sizing: border-box;
-      inline-size: 100%;
-      font-size: 1rem;
-      border: none;
-      border-radius: 4px;
-      padding: 8px;
-      margin-block-start: 4px;
-    }
-
-    textarea {
-      min-block-size: 3rem;
-      resize: vertical;
-    }
-
-    .help {
-      background: transparent;
-      color: var(--black);
-      border: none;
-      padding: 0;
-      inline-size: 48px;
-      position: fixed;
-      inset-inline-end: 16px;
-      inset-block-end: 16px;
-      cursor: pointer;
-    }
-
-    .help>svg {
-      transition: transform 500ms, filter 500ms;
-    }
-
-    .help>svg:hover {
-      transform: translateY(-5%);
-      filter: drop-shadow(0 0 16px var(--secondary));
-      transition: transform 150ms, filter 300ms;
-    }
-
-    dialog {
-      background: var(--primary-lightest);
-      border: none;
-      border-block-start: 8px solid var(--secondary);
-      border-radius: 0 0 4px 4px;
-    }
-
-    dialog h1 {
-      margin: 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conseil de Classe - Questionnaire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
+        
+        .slider-hacker::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #22c55e;
+            cursor: pointer;
+            border: 2px solid #000;
+        }
+        .slider-hacker::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #22c55e;
+            cursor: pointer;
+            border: 2px solid #000;
+            border-radius: 0;
+        }
+        
+        .slider-minimalist::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #111827;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .slider-minimalist::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #111827;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+        }
+        
+        .slider-kawaii::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #ec4899;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(236, 72, 153, 0.4);
+        }
+        .slider-kawaii::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #ec4899;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+            box-shadow: 0 2px 8px rgba(236, 72, 153, 0.4);
+        }
+    </style>
 </head>
+<body class="bg-black text-green-500 font-mono">
+    <div id="app"></div>
 
-<body>
-  <header>
-    <h1>google-forms-frontend</h1>
-  </header>
+    <script>
+        // Configuration Google Forms
+        const FORM_ID = '1FAIpQLSdUutK6wUEX2CuTHkbiYTO2EPSoU2jwWQkUPsfaBPzJ2th21w';
+        const FORM_ACTION = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
 
-  <main>
-    <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSclZ7yXg5kNXTlJUKDNGMCGR9vvgKqzyUB-HfLiwc_sveTxEA/formResponse">
-      <div>
-        <label for="entry.185031848">Short answer</label>
-        <aside>Example description for the short answer.</aside>
-        <input type="text" name="entry.185031848">
-      </div>
+        // Données du formulaire avec mapping correct pour Google Forms
+        const questions = [
+            { id: 'entry.562363546', type: 'radio', question: 'Veux-tu garder ton anonymat lors du conseil de classe ?', options: ['Oui', 'Non'] },
+            { id: 'entry.1154952827', type: 'text', question: 'Qui es-tu ?' },
+            { id: 'entry.971293297', type: 'rating', question: 'Que penses-tu de l\'ambiance générale de la classe ?' },
+            { id: 'entry.758655926', type: 'rating', question: 'Le respect entre élèves' },
+            { id: 'entry.344579238', type: 'rating', question: 'Le niveau de motivation dans la classe' },
+            { id: 'entry.1819721634', type: 'rating', question: 'Le climat de travail dans la classe' },
+            { id: 'entry.349003755', type: 'rating', question: 'À quel point tu te sens serein dans la classe ?' },
+            { id: 'entry.1137800935', type: 'rating', question: 'Le sérieux global de la classe' },
+            { id: 'entry.1789767323', type: 'rating', question: 'Le sentiment de sécurité dans la classe' },
+            { id: 'entry.53674337', type: 'rating', question: 'L\'envie que tu as de venir en cours grâce à l\'ambiance' },
+            { id: 'entry.1323206493', type: 'longtext', question: 'Écris toutes les remarques qui ne peuvent pas se résumer à une note sur 10' },
+            { id: 'entry.71070638', type: 'rating', question: 'Ton organisation' },
+            { id: 'entry.672544970', type: 'rating', question: 'Ton autonomie dans le travail' },
+            { id: 'entry.910558859', type: 'rating', question: 'Ta capacité à rester concentré longtemps' },
+            { id: 'entry.1894024659', type: 'rating', question: 'Tes méthodes de révision' },
+            { id: 'entry.108519480', type: 'rating', question: 'Ton niveau de santé lié au travail scolaire' },
+            { id: 'entry.969136413', type: 'rating', question: 'Ta confiance dans ta capacité à réussir' },
+            { id: 'entry.1923676063', type: 'rating', question: 'À quel point penses-tu que tes notes correspondent à tes efforts ?' },
+            { id: 'entry.297530821', type: 'rating', question: 'Ta gestion du stress', labels: ['Je stresse trop', 'Je suis confiant'] },
+            { id: 'entry.439679883', type: 'rating', question: 'Ta capacité à te détacher de tes devoirs', labels: ['C impossible frrr', 'Je lâche quand je veux'] },
+            { id: 'entry.861083556', type: 'rating', question: 'Ton niveau de motivation générale pour les cours' },
+            { id: 'entry.350870857', type: 'rating', question: 'À quel point tu as des obligations en dehors de l\'école ?', labels: ['Rien', 'Je vais exploser'] },
+            { id: 'entry.1127130651', type: 'longtext', question: 'Remarques ?' },
+            { id: 'entry.1837266851', type: 'rating', question: 'Ta participation en cours', labels: ['Moi pas parler', 'Moi parler beaucoup'] },
+            { id: 'entry.836699724', type: 'rating', question: 'Le rythme des cours', labels: ['Tortue', 'Flash McQueen prime'] },
+            { id: 'entry.43159355', type: 'rating', question: 'La difficulté', labels: ['EZ', 'Harr sa mère'] },
+            { id: 'entry.1132593514', type: 'rating', question: 'Sur 10 matières (environ), combien te plaisent vraiment ?' },
+            { id: 'entry.981283906', type: 'rating', question: 'La clarté des explications des enseignants' },
+            { id: 'entry.540263909', type: 'rating', question: 'Ta compréhension des cours', labels: ['Je capte que dalle', 'C bcp trop ez'] },
+            { id: 'entry.420482620', type: 'rating', question: 'Le niveau de spam Pronote des profs', labels: ['Y a que dalle sur Pronote', 'C des spambot'] },
+            { id: 'entry.967301965', type: 'longtext', question: 'Écris toutes les remarques qui ne peuvent pas se résumer à une note sur 10' },
+            { id: 'entry.138021690', type: 'longtext', question: 'Veux-tu faire passer un message au conseil de classe ?' },
+            { id: 'entry.311128995', type: 'rating', question: 'À quel point trouves-tu ce questionnaire utile ?' },
+            { id: 'entry.930153716', type: 'longtext', question: 'Remarques sur l\'utilité ?' }
+        ];
 
-      <div>
-        <label for="entry.1096192054">Long answer</label>
-        <aside>Example description for the long answer.</aside>
-        <textarea name="entry.1096192054" rows="10"></textarea>
-      </div>
+        // État de l'application
+        let currentState = {
+            step: 0,
+            submitted: false,
+            theme: 'hacker',
+            showThemeMenu: false,
+            formData: {}
+        };
 
-      <div>
-        <label for="entry.552287623">Multiple choice</label>
-        <aside>Example description for the multiple choice.</aside>
-        <input list="multiple-choice" name="entry.552287623">
-        <datalist id="multiple-choice">
-          <option value="Multiple choice option 1">
-          <option value="Multiple choice option 2">
-          <option value="Multiple choice option 3">
-          <option value="Multiple choice option 4">
-          <option value="Multiple choice option 5">
-        </datalist>
+        // Initialiser les données du formulaire
+        questions.forEach(q => {
+            currentState.formData[q.id] = q.type === 'rating' ? '5' : '';
+        });
 
-      </div>
+        // Thèmes
+        const themes = {
+            hacker: {
+                bg: 'bg-black',
+                text: 'text-green-500',
+                border: 'border-green-500/30',
+                borderHover: 'hover:border-green-500',
+                accentBg: 'bg-green-500',
+                accentText: 'text-green-400',
+                secondaryBg: 'bg-green-500/10',
+                progressBg: 'bg-green-950',
+                font: 'font-mono'
+            }
+        };
 
-      <div>
-        <label for="entry.2010116811">Date</label>
-        <aside>Example description for the date.</aside>
-        <input type="date" name="entry.2010116811">
-      </div>
+        function render() {
+            const app = document.getElementById('app');
+            if (currentState.submitted) {
+                app.innerHTML = renderSuccess();
+                return;
+            }
+            app.innerHTML = renderForm();
+            attachEventListeners();
+        }
 
-      <div>
-        <label for="entry.1500214518">Time</label>
-        <aside>Example description for the time.</aside>
-        <input type="time" name="entry.1500214518">
-      </div>
+        function renderForm() {
+            const t = themes[currentState.theme];
+            const currentQuestion = questions[currentState.step];
+            const progress = ((currentState.step + 1) / questions.length) * 100;
 
-      <button type="submit" name="submit">Submit</button>
-      <output name="status"></output>
-    </form>
+            return `
+                <div class="min-h-screen ${t.bg} ${t.text} flex items-center justify-center p-6">
+                    <div class="w-full max-w-3xl">
+                        <!-- Header -->
+                        <div class="mb-6 flex items-center gap-3 text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <span class="opacity-60">conseil_de_classe.sh</span>
+                            <span class="opacity-40 ml-auto">q${currentState.step + 1}/${questions.length}</span>
+                        </div>
 
-    <button class="help">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-      </svg>
-    </button>
+                        <!-- Progress Bar -->
+                        <div class="mb-8">
+                            <div class="h-1 ${t.progressBg} overflow-hidden">
+                                <div class="h-full ${t.accentBg} transition-all duration-700 ease-out" style="width: ${progress}%"></div>
+                            </div>
+                            <div class="flex justify-between mt-2 text-xs opacity-60">
+                                <span>[${Math.round(progress)}%]</span>
+                                <span>${currentState.step + 1} of ${questions.length}</span>
+                            </div>
+                        </div>
 
-    <dialog>
-      <h1>About this site</h1>
-      <p>This website is a custom frontend for a <a href="https://docs.google.com/forms/d/e/1FAIpQLSclZ7yXg5kNXTlJUKDNGMCGR9vvgKqzyUB-HfLiwc_sveTxEA/viewform">Google Form</a>.</p>
-      <p>It's intended to serve as a reference implementation for other projects.</p>
-      <p><a href="https://github.com/ardislu/google-forms-frontend">Click here</a> to view the source code on GitHub.</p>
-      <form method="dialog">
-        <button>OK</button>
-      </form>
-    </dialog>
-  </main>
+                        <!-- Question Card -->
+                        <div class="border ${t.border} ${t.bg}">
+                            <div class="border-b ${t.border} px-6 py-3 text-xs flex items-center gap-2">
+                                <span class="opacity-60">$</span>
+                                <span>question_${currentState.step + 1}.sh</span>
+                            </div>
+                            
+                            <div class="p-8">
+                                <div class="animate-fadeIn">
+                                    <div class="mb-6">
+                                        <span class="text-green-500/60 text-sm">> </span>
+                                        <span class="${t.accentText} text-xl">${currentQuestion.question}</span>
+                                    </div>
+                                    ${renderQuestionInput(currentQuestion)}
+                                </div>
+                            </div>
 
-  <script>
-    document.querySelector('.help').addEventListener('click', e => document.querySelector('dialog').showModal());
+                            <!-- Navigation -->
+                            <div class="border-t ${t.border} px-8 py-6 flex gap-3 text-sm">
+                                ${currentState.step > 0 ? `
+                                    <button id="prev-btn" class="flex-1 px-4 py-3 border ${t.border} ${t.borderHover} ${t.secondaryBg} ${t.text} transition-all flex items-center justify-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                        </svg>
+                                        <span class="hidden sm:inline">prev</span>
+                                    </button>
+                                ` : '<div class="flex-1"></div>'}
+                                
+                                ${currentState.step < questions.length - 1 ? `
+                                    <button id="next-btn" class="flex-1 px-4 py-3 border ${t.border.replace('/30', '')} ${t.secondaryBg} ${t.accentText} transition-all flex items-center justify-center gap-2">
+                                        <span class="hidden sm:inline">next</span>
+                                        <svg class="w-4 h-4 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                        </svg>
+                                    </button>
+                                ` : `
+                                    <button id="submit-btn" class="flex-1 px-4 py-3 ${t.accentBg} text-black font-semibold transition-all flex items-center justify-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                        <span class="hidden sm:inline">submit</span>
+                                    </button>
+                                `}
+                            </div>
+                        </div>
 
-    document.querySelector('form').addEventListener('submit', async event => {
-      event.preventDefault();
+                        <div class="mt-6 text-center text-xs opacity-40">
+                            [encrypted connection to google sheets]
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
 
-      const data = new FormData(event.target);
-      const params = new URLSearchParams(data);
+        function renderQuestionInput(question) {
+            const value = currentState.formData[question.id];
+            
+            switch(question.type) {
+                case 'radio':
+                    return `
+                        <div class="space-y-2">
+                            ${question.options.map((option, idx) => `
+                                <button type="button" class="radio-btn w-full px-4 py-3 text-left transition-all border ${t.border} ${t.borderHover} opacity-60 hover:opacity-100 ${
+                                    value === option ? 'border-green-500 bg-green-500/10 text-green-400 opacity-100' : ''
+                                }" data-value="${option}">
+                                    <span class="opacity-60">[${idx + 1}]</span> ${option}
+                                </button>
+                            `).join('')}
+                        </div>
+                    `;
+                
+                case 'text':
+                    return `
+                        <div>
+                            <span class="opacity-60 mr-2">></span>
+                            <input type="text" class="text-input bg-transparent border-b ${t.border} focus:${t.border.replace('/30', '')} outline-none ${t.accentText} w-full pb-2 transition-colors" 
+                                   value="${value}" placeholder="type_here..." autofocus>
+                        </div>
+                    `;
+                
+                case 'rating':
+                    return `
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <span class="opacity-60 text-xs">${question.labels ? question.labels[0] : '1'}</span>
+                                <input type="range" min="1" max="10" value="${value}" class="rating-slider flex-1 h-1 ${t.progressBg} appearance-none cursor-pointer slider-hacker">
+                                <span class="opacity-60 text-xs">${question.labels ? question.labels[1] : '10'}</span>
+                            </div>
+                            
+                            <div class="border ${t.border} px-6 py-3 text-center">
+                                <span class="text-4xl ${t.accentText} font-bold rating-value">${value}</span>
+                                <span class="opacity-60">/10</span>
+                            </div>
+                            
+                            ${!question.labels ? `
+                                <div class="grid grid-cols-10 gap-1 text-xs opacity-40 text-center">
+                                    ${[1,2,3,4,5,6,7,8,9,10].map(num => `<div>${num}</div>`).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                
+                case 'longtext':
+                    return `
+                        <div>
+                            <textarea class="longtext-input w-full bg-transparent border ${t.border} focus:${t.border.replace('/30', '')} outline-none ${t.accentText} p-4 transition-colors resize-none" 
+                                      rows="6" placeholder="// enter your response here..." autofocus>${value}</textarea>
+                            <div class="text-right text-xs opacity-40 mt-1">
+                                <span class="char-count">${value.length}</span> chars
+                            </div>
+                        </div>
+                    `;
+            }
+        }
 
-      // Split date param into _year, _month, and _day as required by Google Forms
-      const dateValue = new Date(`${params.get('entry.2010116811')} UTC`); // UTC prevents later functions from shifting values to match local timezone
-      params.set('entry.2010116811_year', dateValue.getUTCFullYear());
-      params.set('entry.2010116811_month', dateValue.getUTCMonth() + 1); // Google Forms requires 1-12, but getMonth is 0-11
-      params.set('entry.2010116811_day', dateValue.getUTCDate());
+        function renderSuccess() {
+            const t = themes[currentState.theme];
+            return `
+                <div class="min-h-screen ${t.bg} flex items-center justify-center p-6">
+                    <div class="border ${t.border} ${t.bg} p-12 max-w-md w-full">
+                        <div class="mb-8 flex justify-center">
+                            <svg class="w-16 h-16 ${t.text}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div class="${t.font} ${t.text} space-y-2 text-center">
+                            <p class="text-sm opacity-60">$ submit_form --status</p>
+                            <p class="text-lg">> SUCCESS</p>
+                            <p class="text-sm opacity-60">> Data transmitted</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
 
-      // Split time param into _hour and _minute as required by Google Forms
-      const timeValue = new Date(`January 1, 1970 ${params.get('entry.1500214518')} UTC`); // Date value can be any arbitrary date, but it's required. UTC prevents later functions from shifting values to match local timezone
-      params.set('entry.1500214518_hour', timeValue.getUTCHours().toString().padStart(2, '0')); // Google Forms requires 2 digits, but getHours does not include leading 0
-      params.set('entry.1500214518_minute', timeValue.getUTCMinutes().toString().padStart(2, '0')); // Google Forms requires 2 digits, but getMinutes does not include leading 0
+        function attachEventListeners() {
+            // Navigation
+            document.getElementById('prev-btn')?.addEventListener('click', () => {
+                if (currentState.step > 0) {
+                    currentState.step--;
+                    render();
+                }
+            });
 
-      await fetch(event.target.action, { method: 'POST', body: params, mode: 'no-cors' }); // Can't set CORS headers for Google Forms, so can't access the Response. But Request will still be sent.
-      event.target.elements['submit'].disabled = true;
-      event.target.elements['status'].textContent = '✔ Form submitted!'; // Assume the response was successful
-    });
-  </script>
+            document.getElementById('next-btn')?.addEventListener('click', () => {
+                if (currentState.step < questions.length - 1) {
+                    currentState.step++;
+                    render();
+                }
+            });
+
+            document.getElementById('submit-btn')?.addEventListener('click', () => {
+                submitToGoogleForms();
+            });
+
+            // Input handlers
+            document.querySelectorAll('.radio-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const question = questions[currentState.step];
+                    currentState.formData[question.id] = e.target.dataset.value;
+                    render();
+                });
+            });
+
+            const textInput = document.querySelector('.text-input');
+            if (textInput) {
+                textInput.addEventListener('input', (e) => {
+                    const question = questions[currentState.step];
+                    currentState.formData[question.id] = e.target.value;
+                });
+                textInput.focus();
+            }
+
+            const ratingInput = document.querySelector('.rating-slider');
+            if (ratingInput) {
+                ratingInput.addEventListener('input', (e) => {
+                    const question = questions[currentState.step];
+                    currentState.formData[question.id] = e.target.value;
+                    document.querySelector('.rating-value').textContent = e.target.value;
+                });
+            }
+
+            const longtextInput = document.querySelector('.longtext-input');
+            if (longtextInput) {
+                longtextInput.addEventListener('input', (e) => {
+                    const question = questions[currentState.step];
+                    currentState.formData[question.id] = e.target.value;
+                    document.querySelector('.char-count').textContent = e.target.value.length;
+                });
+                longtextInput.focus();
+            }
+        }
+
+        // CORRECTION CRITIQUE : Conversion des valeurs pour Google Forms
+        function formatValueForGoogleForms(question, value) {
+            if (question.type === 'rating') {
+                // Pour les échelles linéaires, Google Forms attend le numéro de l'option (1-10)
+                // Mais formaté comme une chaîne
+                return value.toString();
+            }
+            return value;
+        }
+
+        function submitToGoogleForms() {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = FORM_ACTION;
+            form.target = '_blank';
+            form.style.display = 'none';
+
+            // Ajouter tous les champs au formulaire
+            Object.entries(currentState.formData).forEach(([key, value]) => {
+                const question = questions.find(q => q.id === key);
+                const formattedValue = formatValueForGoogleForms(question, value);
+                
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = formattedValue;
+                form.appendChild(input);
+            });
+
+            document.body.appendChild(form);
+            
+            // Soumettre le formulaire
+            form.submit();
+            
+            // Afficher le message de succès après un court délai
+            setTimeout(() => {
+                currentState.submitted = true;
+                render();
+                document.body.removeChild(form);
+            }, 1000);
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            render();
+        });
+
+        // Référence au thème actuel
+        const t = themes[currentState.theme];
+    </script>
 </body>
-
 </html>
